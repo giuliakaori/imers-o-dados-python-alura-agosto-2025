@@ -67,6 +67,10 @@ st.markdown("---")
 # --- Análises Visuais com Plotly ---
 st.subheader("Gráficos")
 
+# Paletas de cores para os gráficos
+paleta_rosa_continua = "Pinks"
+paleta_rosa_discreta = ["#C71585", "#FF1493", "#FF69B4", "#DB7093", "#FFC0CB"]
+
 col_graf1, col_graf2 = st.columns(2)
 
 with col_graf1:
@@ -78,7 +82,8 @@ with col_graf1:
             y='cargo',
             orientation='h',
             title="Top 10 cargos por salário médio",
-            labels={'usd': 'Média salarial anual (USD)', 'cargo': ''}
+            labels={'usd': 'Média salarial anual (USD)', 'cargo': ''},
+            color_discrete_sequence=[paleta_rosa_discreta[0]] * len(top_cargos)
         )
         grafico_cargos.update_layout(title_x=0.1, yaxis={'categoryorder':'total ascending'})
         st.plotly_chart(grafico_cargos, use_container_width=True)
@@ -92,7 +97,8 @@ with col_graf2:
             x='usd',
             nbins=30,
             title="Distribuição de salários anuais",
-            labels={'usd': 'Faixa salarial (USD)', 'count': ''}
+            labels={'usd': 'Faixa salarial (USD)', 'count': ''},
+            color_discrete_sequence=[paleta_rosa_discreta[1]]
         )
         grafico_hist.update_layout(title_x=0.1)
         st.plotly_chart(grafico_hist, use_container_width=True)
@@ -110,7 +116,8 @@ with col_graf3:
             names='tipo_trabalho',
             values='quantidade',
             title='Proporção dos tipos de trabalho',
-            hole=0.5
+            hole=0.5,
+            color_discrete_sequence=paleta_rosa_discreta
         )
         grafico_remoto.update_traces(textinfo='percent+label')
         grafico_remoto.update_layout(title_x=0.1)
@@ -125,7 +132,7 @@ with col_graf4:
         grafico_paises = px.choropleth(media_ds_pais,
             locations='residencia_iso3',
             color='usd',
-            color_continuous_scale='rdylgn',
+            color_continuous_scale=paleta_rosa_continua,
             title='Salário médio de Cientista de Dados por país',
             labels={'usd': 'Salário médio (USD)', 'residencia_iso3': 'País'})
         grafico_paises.update_layout(title_x=0.1)
