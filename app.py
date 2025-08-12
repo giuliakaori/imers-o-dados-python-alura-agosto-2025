@@ -68,7 +68,7 @@ st.markdown("---")
 st.subheader("Gráficos")
 
 # Paletas de cores para os gráficos
-paleta_rosa_continua = "Pinks"
+paleta_rosa_continua = "pinkyl"
 paleta_rosa_discreta = ["#C71585", "#FF1493", "#FF69B4", "#DB7093", "#FFC0CB"]
 
 col_graf1, col_graf2 = st.columns(2)
